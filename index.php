@@ -10,6 +10,9 @@ try {
 
     $resultado = $stmt->fetchAll(\PDO::FETCH_CLASS);
 
+    #Quando deve retornar apenas um registro
+    #$resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+
     echo $resultado[0]->nome;
 
     print_r($resultado);

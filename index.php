@@ -3,9 +3,11 @@
 try {
     $conexao = \PDO("mysql:host=localhost;dbname=pdo", "root", "root");
 
-    $query = "show tables";
+    #$query = "show tables";
+    $query = "select * from clientes";
 
-    $resultado = $conexao->exec($query);
+    $stmt = $conexao->exec($query);
+    $resultado = $stmt->fetchAll();
 
     print_r($resultado);
 }

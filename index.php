@@ -7,7 +7,10 @@ try {
     $query = "select * from clientes";
 
     $stmt = $conexao->exec($query);
-    $resultado = $stmt->fetchAll();
+
+    $resultado = $stmt->fetchAll(\PDO::FETCH_CLASS);
+
+    echo $resultado[0]->nome;
 
     print_r($resultado);
 }

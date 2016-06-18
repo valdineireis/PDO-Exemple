@@ -6,16 +6,10 @@ try {
     #$query = "show tables";
     $query = "select * from clientes";
 
-    $stmt = $conexao->exec($query);
+    foreach ($conexao->query($query) as $cliente) {
+        echo $cliente['nome'] . "<br>";
+    }
 
-    $resultado = $stmt->fetchAll(\PDO::FETCH_CLASS);
-
-    #Quando deve retornar apenas um registro
-    #$resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-    echo $resultado[0]->nome;
-
-    print_r($resultado);
 }
 catch (\PDOException $e) {
     echo "Não foi possível estabelecer uma conexão com o banco de dados. Erro código: " . $e->getCode();

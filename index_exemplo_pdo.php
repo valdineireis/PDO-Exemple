@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $conexao = \PDO("mysql:host=localhost;dbname=pdo", "root", "root");
+    $conexao = new \PDO("mysql:host=localhost;dbname=pdo","root","root");
 
     #$query = "show tables";
     $query = "select * from clientes where id = :id";

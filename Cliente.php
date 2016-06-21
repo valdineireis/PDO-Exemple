@@ -13,14 +13,21 @@ class Cliente
         $this->db = $db;
     }
 
-    public function listar()
+    public function listar($ordem = null)
     {
+        if ($ordem) {
+            $query = "SELECT * FROM clientes ORDER BY {$ordem}";
+        } else {
+            $query = "SELECT * FROM clientes";
+        }
 
+        $stmt = $this->db->query($query);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function inserir()
     {
-        $query = "Insert into clientes(nome, email) values(:nome, :email)";
+        $query = "INSERT INTO clientes(nome, email) VALUES(:nome, :email)";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':nome', $this->getNome());

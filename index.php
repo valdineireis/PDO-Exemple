@@ -14,5 +14,8 @@ $cliente->setNome("Valdinei")
         ->setEmail("valdinei@nocodigo.com")
 ;
 
-$resultado = $cliente->inserir();
-echo $resultado;
+#$resultado = $cliente->inserir();
+
+foreach ($cliente->listar("id DESC") as $c) {
+    echo $c['nome'] . "<br>";
+}

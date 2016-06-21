@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Cliente.php';
+require_once 'ClienteServiceDB.php';
 
 try {
     $conexao = \PDO("mysql:host=localhost;dbname=pdo", "root", "root");
@@ -9,20 +10,14 @@ catch (\PDOException $e) {
     die("Não foi possível estabelecer uma conexão com o banco de dados. Erro código: " . $e->getCode());
 }
 
-$cliente = new Cliente($conexao);
+$cliente = new Cliente();
 
-$resultado = $cliente->find(1);
+$cliente->setNome("Teste")
+        ->setEmail("teste@email.com")
+;
 
-echo $resultado['nome'] . " - " . $resultado['email'];
-
-//$cliente->setId(1)
-//        ->setNome("Valdinei Reis")
-//        ->setEmail("valdinei@nocodigo.com")
-//;
-
-//$resultado = $cliente->update();
-
-#$cliente->deletar(2);
+$serviceDb = new ClienteServiceDB($conexao, $cliente);
+$serviceDb->inserir();
 
 //foreach ($cliente->listar("id DESC") as $c) {
 //    echo $c['nome'] . "<br>";

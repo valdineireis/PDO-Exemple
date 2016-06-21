@@ -1,7 +1,8 @@
 <?php
 
+require_once 'EntidadeInterface.php';
 require_once 'Cliente.php';
-require_once 'ClienteServiceDB.php';
+require_once 'ServiceDB.php';
 
 try {
     $conexao = \PDO("mysql:host=localhost;dbname=pdo", "root", "root");
@@ -19,6 +20,6 @@ $cliente->setNome("Teste")
 $serviceDb = new ClienteServiceDB($conexao, $cliente);
 $serviceDb->inserir();
 
-//foreach ($cliente->listar("id DESC") as $c) {
+//foreach ($serviceDb->listar("id DESC") as $c) {
 //    echo $c['nome'] . "<br>";
 //}

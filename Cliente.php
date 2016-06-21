@@ -1,6 +1,6 @@
 <?php
 
-class Cliente
+class Cliente implements EntidadeInterface
 {
     private $table = "clientes";
     
@@ -14,6 +14,15 @@ class Cliente
     public function getTable()
     {
         return $this->table;
+    }
+
+    /**
+     * @param string $table
+     */
+    public function setTable($table)
+    {
+        $this->table = $table;
+        return $this;
     }
 
     /**

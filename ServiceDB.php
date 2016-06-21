@@ -1,19 +1,19 @@
 <?php
 
-class ClienteServiceDB
+class ServiceDB
 {
     private $db;
-    private $cliente;
+    private $entity;
     
-    public function __construct($db, Cliente $cliente)
+    public function __construct($db, EntidadeInterface $entity)
     {
         $this->db = $db;
-        $this->cliente = $cliente;
+        $this->entity = $entity;
     }
 
     public function find($id)
     {
-        $query = "SELECT * FROM {$this->cliente->getTable()} WHERE id=:id";
+        $query = "SELECT * FROM {$this->entity->getTable()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);
@@ -25,9 +25,9 @@ class ClienteServiceDB
     public function listar($ordem = null)
     {
         if ($ordem) {
-            $query = "SELECT * FROM {$this->cliente->getTable()} ORDER BY {$ordem}";
+            $query = "SELECT * FROM {$this->entity->getTable()} ORDER BY {$ordem}";
         } else {
-            $query = "SELECT * FROM {$this->cliente->getTable()}";
+            $query = "SELECT * FROM {$this->entity->getTable()}";
         }
 
         $stmt = $this->db->query($query);
@@ -36,11 +36,11 @@ class ClienteServiceDB
 
     public function inserir()
     {
-        $query = "INSERT INTO {$this->cliente->getTable()}(nome, email) VALUES(:nome, :email)";
+        $query = "INSERT INTO {$this->entity->getTable()}(nome, email) VALUES(:nome, :email)";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':nome', $this->cliente->getNome());
-        $stmt->bindValue(':email', $this->cliente->getEmail());
+        $stmt->bindValue(':nome', $this->entity->getNome());
+        $stmt->bindValue(':email', $this->entity->getEmail());
 
         if ($stmt->execute()) {
             return true;
@@ -49,12 +49,12 @@ class ClienteServiceDB
 
     public function alterar()
     {
-        $query = "UPDATE {$this->cliente->getTable()} SET nome=:nome, email=:email WHERE id=:id";
+        $query = "UPDATE {$this->entity->getTable()} SET nome=:nome, email=:email WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':id', $this->cliente->getId());
-        $stmt->bindValue(':nome', $this->cliente->getNome());
-        $stmt->bindValue(':email', $this->cliente->getEmail());
+        $stmt->bindValue(':id', $this->entity->getId());
+        $stmt->bindValue(':nome', $this->entity->getNome());
+        $stmt->bindValue(':email', $this->entity->getEmail());
 
         if ($stmt->execute()) {
             return true;
@@ -63,7 +63,7 @@ class ClienteServiceDB
 
     public function deletar($id)
     {
-        $query = "DELETE FROM {$this->cliente->getTable()} WHERE id=:id";
+        $query = "DELETE FROM {$this->entity->getTable()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);

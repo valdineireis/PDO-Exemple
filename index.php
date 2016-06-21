@@ -18,6 +18,8 @@ $cliente->setId(1)
 
 $resultado = $cliente->update();
 
+#$cliente->deletar(2);
+
 foreach ($cliente->listar("id DESC") as $c) {
     echo $c['nome'] . "<br>";
 }

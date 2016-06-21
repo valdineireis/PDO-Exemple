@@ -52,9 +52,16 @@ class Cliente
         }
     }
 
-    public function deletar()
+    public function deletar($id)
     {
+        $query = "DELETE FROM clientes WHERE id=:id";
 
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
     /**

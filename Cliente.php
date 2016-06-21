@@ -40,7 +40,16 @@ class Cliente
 
     public function alterar()
     {
+        $query = "UPDATE clientes SET nome=:nome, email=:email WHERE id=:id";
 
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $this->getId());
+        $stmt->bindValue(':nome', $this->getNome());
+        $stmt->bindValue(':email', $this->getEmail());
+
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
     public function deletar()

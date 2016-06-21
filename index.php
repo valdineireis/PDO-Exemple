@@ -10,11 +10,13 @@ catch (\PDOException $e) {
 }
 
 $cliente = new Cliente($conexao);
-$cliente->setNome("Valdinei")
+
+$cliente->setId(1)
+        ->setNome("Valdinei Reis")
         ->setEmail("valdinei@nocodigo.com")
 ;
 
-#$resultado = $cliente->inserir();
+$resultado = $cliente->update();
 
 foreach ($cliente->listar("id DESC") as $c) {
     echo $c['nome'] . "<br>";

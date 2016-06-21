@@ -11,15 +11,19 @@ catch (\PDOException $e) {
 
 $cliente = new Cliente($conexao);
 
-$cliente->setId(1)
-        ->setNome("Valdinei Reis")
-        ->setEmail("valdinei@nocodigo.com")
-;
+$resultado = $cliente->find(1);
 
-$resultado = $cliente->update();
+echo $resultado['nome'] . " - " . $resultado['email'];
+
+//$cliente->setId(1)
+//        ->setNome("Valdinei Reis")
+//        ->setEmail("valdinei@nocodigo.com")
+//;
+
+//$resultado = $cliente->update();
 
 #$cliente->deletar(2);
 
-foreach ($cliente->listar("id DESC") as $c) {
-    echo $c['nome'] . "<br>";
-}
+//foreach ($cliente->listar("id DESC") as $c) {
+//    echo $c['nome'] . "<br>";
+//}

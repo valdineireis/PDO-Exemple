@@ -13,6 +13,17 @@ class Cliente
         $this->db = $db;
     }
 
+    public function find($id)
+    {
+        $query = "SELECT * FROM clientes WHERE id=:id";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function listar($ordem = null)
     {
         if ($ordem) {

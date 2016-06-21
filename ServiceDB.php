@@ -36,13 +36,14 @@ class ServiceDB
 
     public function inserir()
     {
-        $query = "INSERT INTO {$this->entity->getTable()}(nome, email) VALUES(:nome, :email)";
+        $fileds = implode(', ', array_keys($this->entity->getDados()));
+        $places = ':' . implode(', :', array_keys($this->entity->getDados()));
 
+        $query = "INSERT INTO {$this->entity->getTable()} ({$fileds}) VALUES ({$places})";
+        
         $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':nome', $this->entity->getNome());
-        $stmt->bindValue(':email', $this->entity->getEmail());
 
-        if ($stmt->execute()) {
+        if ($stmt->execute($this->entity->getDados())) {
             return true;
         }
     }
@@ -71,5 +72,14 @@ class ServiceDB
         if ($stmt->execute()) {
             return true;
         }
+    }
+
+    private function getColumns()
+    {
+        $stmt = $this->db->prepare("DESCRIBE {$this->entity->getTable()}");
+        $stmt->execute();
+
+        $columnsName = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+        return $columnsName;
     }
 }

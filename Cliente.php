@@ -8,6 +8,14 @@ class Cliente implements EntidadeInterface
     private $nome;
     private $email;
 
+    public function getDados()
+    {
+        return array(
+            "nome" => $this->getNome(),
+            "email" => $this->getEmail()
+        );
+    }
+    
     /**
      * @return string
      */

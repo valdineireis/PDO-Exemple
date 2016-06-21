@@ -7,4 +7,6 @@ interface EntidadeInterface
     
     public function getTable();
     public function setTable($table);
+
+    public function getDados();
 }

@@ -2,9 +2,19 @@
 
 class Cliente
 {
+    private $table = "clientes";
+    
     private $id;
     private $nome;
     private $email;
+
+    /**
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
 
     /**
      * @return mixed

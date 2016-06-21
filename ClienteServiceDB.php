@@ -13,7 +13,7 @@ class ClienteServiceDB
 
     public function find($id)
     {
-        $query = "SELECT * FROM clientes WHERE id=:id";
+        $query = "SELECT * FROM {$this->cliente->getTable()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);
@@ -25,9 +25,9 @@ class ClienteServiceDB
     public function listar($ordem = null)
     {
         if ($ordem) {
-            $query = "SELECT * FROM clientes ORDER BY {$ordem}";
+            $query = "SELECT * FROM {$this->cliente->getTable()} ORDER BY {$ordem}";
         } else {
-            $query = "SELECT * FROM clientes";
+            $query = "SELECT * FROM {$this->cliente->getTable()}";
         }
 
         $stmt = $this->db->query($query);
@@ -36,7 +36,7 @@ class ClienteServiceDB
 
     public function inserir()
     {
-        $query = "INSERT INTO clientes(nome, email) VALUES(:nome, :email)";
+        $query = "INSERT INTO {$this->cliente->getTable()}(nome, email) VALUES(:nome, :email)";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':nome', $this->cliente->getNome());
@@ -49,7 +49,7 @@ class ClienteServiceDB
 
     public function alterar()
     {
-        $query = "UPDATE clientes SET nome=:nome, email=:email WHERE id=:id";
+        $query = "UPDATE {$this->cliente->getTable()} SET nome=:nome, email=:email WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $this->cliente->getId());
@@ -63,7 +63,7 @@ class ClienteServiceDB
 
     public function deletar($id)
     {
-        $query = "DELETE FROM clientes WHERE id=:id";
+        $query = "DELETE FROM {$this->cliente->getTable()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);

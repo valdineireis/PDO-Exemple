@@ -2,11 +2,26 @@
 
 interface EntidadeInterface
 {
+    /**
+     * @return ID do objeto criado no banco de dados
+     */
     public function getId();
-    public function setId($id);
-    
-    public function getTable();
-    public function setTable($table);
 
+    /**
+     * @param $id Codigo gerado pelo banco de dados
+     * @return ID
+     */
+    public function setId($id);
+
+    /**
+     * Nome da tabela que representa o objeto no banco de dados
+     * @return Nome da tabela do banco de dados
+     */
+    public function getTable();
+
+    /**
+     * Array com os campos que representam as colunas do banco de dados
+     * @return array
+     */
     public function getDados();
 }

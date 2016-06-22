@@ -1,5 +1,6 @@
 <?php
 
+require_once 'Entidade.php';
 require_once 'EntidadeInterface.php';
 require_once 'Cliente.php';
 require_once 'ServiceDB.php';

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Name: Valdinei Reis
+ * Email: valdinei@nocodigo.com
+ * Date: 22/06/16
+ */
 class Cliente extends Entidade implements EntidadeInterface
 {
     private $nome;

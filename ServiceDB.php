@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Name: Valdinei Reis
+ * Email: valdinei@nocodigo.com
+ * Date: 21/06/16
+ * Last Update: 22/06/2016
+ */
 abstract class ServiceDB
 {
     protected $db;

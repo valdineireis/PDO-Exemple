@@ -2,10 +2,13 @@
 
 class Cliente extends Entidade implements EntidadeInterface
 {
-    private $table = "clientes";
-    
     private $nome;
     private $email;
+
+    public function getTableName()
+    {
+        return "clientes";
+    }
 
     public function getDados()
     {
@@ -13,14 +16,6 @@ class Cliente extends Entidade implements EntidadeInterface
             "nome" => $this->getNome(),
             "email" => $this->getEmail()
         );
-    }
-    
-    /**
-     * @return string
-     */
-    public function getTable()
-    {
-        return $this->table;
     }
 
     /**

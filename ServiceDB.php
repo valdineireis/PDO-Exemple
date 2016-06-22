@@ -13,7 +13,7 @@ class ServiceDB
 
     public function find($id)
     {
-        $query = "SELECT * FROM {$this->entity->getTable()} WHERE id=:id";
+        $query = "SELECT * FROM {$this->entity->getTableName()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);
@@ -25,9 +25,9 @@ class ServiceDB
     public function listar($ordem = null)
     {
         if ($ordem) {
-            $query = "SELECT * FROM {$this->entity->getTable()} ORDER BY {$ordem}";
+            $query = "SELECT * FROM {$this->entity->getTableName()} ORDER BY {$ordem}";
         } else {
-            $query = "SELECT * FROM {$this->entity->getTable()}";
+            $query = "SELECT * FROM {$this->entity->getTableName()}";
         }
 
         $stmt = $this->db->query($query);
@@ -39,7 +39,7 @@ class ServiceDB
         $fileds = implode(', ', array_keys($this->entity->getDados()));
         $places = ':' . implode(', :', array_keys($this->entity->getDados()));
 
-        $query = "INSERT INTO {$this->entity->getTable()} ({$fileds}) VALUES ({$places})";
+        $query = "INSERT INTO {$this->entity->getTableName()} ({$fileds}) VALUES ({$places})";
         
         $stmt = $this->db->prepare($query);
 
@@ -56,7 +56,7 @@ class ServiceDB
         
         $places = implode(', ', $places);
 
-        $query = "UPDATE {$this->entity->getTable()} SET {$places} WHERE id = :id";
+        $query = "UPDATE {$this->entity->getTableName()} SET {$places} WHERE id = :id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $this->entity->getId());
@@ -72,7 +72,7 @@ class ServiceDB
 
     public function deletar($id)
     {
-        $query = "DELETE FROM {$this->entity->getTable()} WHERE id=:id";
+        $query = "DELETE FROM {$this->entity->getTableName()} WHERE id=:id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);

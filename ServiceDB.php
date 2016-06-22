@@ -81,13 +81,4 @@ class ServiceDB
             return true;
         }
     }
-
-    private function getColumns()
-    {
-        $stmt = $this->db->prepare("DESCRIBE {$this->entity->getTable()}");
-        $stmt->execute();
-
-        $columnsName = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-        return $columnsName;
-    }
 }

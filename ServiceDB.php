@@ -50,12 +50,20 @@ class ServiceDB
 
     public function alterar()
     {
-        $query = "UPDATE {$this->entity->getTable()} SET nome=:nome, email=:email WHERE id=:id";
+        foreach ($this->entity->getDados() as $key => $value) {
+            $places[] = $key . ' = :' . $key;
+        }
+        
+        $places = implode(', ', $places);
+
+        $query = "UPDATE {$this->entity->getTable()} SET {$places} WHERE id = :id";
 
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $this->entity->getId());
-        $stmt->bindValue(':nome', $this->entity->getNome());
-        $stmt->bindValue(':email', $this->entity->getEmail());
+
+        foreach ($this->entity->getDados() as $key => $value) {
+            $stmt->bindValue(':' . $key, $value);
+        }
 
         if ($stmt->execute()) {
             return true;

@@ -13,14 +13,16 @@ catch(\PDOException $e) {
 
 $cliente = new Cliente();
 
-$cliente->setNome("Valdinei")
-        ->setEmail("valdinei@email.com")
+$cliente->setId(3)
+    ->setNome("Valdinei Reis")
+    ->setEmail("valdinei@nocodigo.com")
 ;
 
 $serviceDb = new ServiceDB($conexao, $cliente);
-#var_dump($serviceDb->getColumns());
-$serviceDb->inserir();
+
+//$serviceDb->inserir();
+$serviceDb->alterar();
 
 foreach ($serviceDb->listar("id DESC") as $c) {
-    echo $c['nome'] . "<br>";
+    echo $c['id'] . ' - ' . $c['nome'] . ' - ' . $c['email'] . "<br>";
 }

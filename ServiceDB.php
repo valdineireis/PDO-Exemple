@@ -1,9 +1,9 @@
 <?php
 
-class ServiceDB
+abstract class ServiceDB
 {
-    private $db;
-    private $entity;
+    protected $db;
+    protected $entity;
     
     public function __construct($db, EntidadeInterface $entity)
     {

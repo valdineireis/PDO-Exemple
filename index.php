@@ -4,6 +4,7 @@ require_once 'Entidade.php';
 require_once 'EntidadeInterface.php';
 require_once 'Cliente.php';
 require_once 'ServiceDB.php';
+require_once 'ClienteService.php';
 
 try {
     $conexao = new \PDO("mysql:host=localhost;dbname=pdo","root","root");
@@ -19,7 +20,7 @@ $cliente->setId(3)
     ->setEmail("valdinei@nocodigo.com")
 ;
 
-$serviceDb = new ServiceDB($conexao, $cliente);
+$serviceDb = new ClienteService($conexao, $cliente);
 
 //$serviceDb->inserir();
 $serviceDb->alterar();
